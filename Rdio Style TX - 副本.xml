@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    // Radio Style T version 1.0
+	// Based on Rdio Style wc Version 1.0 8-1-20 WesC
+	// Based on Rdio Version 2.1
+
+	<settings enableScaling="true" />
+
+
+	<!-- Background Cover -->
+	<element type="BackgroundAlbumCover" brightness="0.2" refreshInterval="EndOfTrack"/>
+
+	<!-- Left panel -->
+
+	<!-- Album Cover -->
+	<element type="AlbumCover" x="-100" y="-100" width="10" height="10" min="10" max="10"/>
+	<element name="#Cover" type="AlbumCover" xAnchor="Panel.48" x="0" yAnchor="Panel.12" y="0" align="Top.Right" widthDock="Panel.Height.60" width="0" heightDock="Panel.Height.60" height="0" brightness="1.0"/>
+
+	<!-- hidden text over album cover for play/pause -->
+	<element type="Text" xAnchor="Panel.48" x="0" yAnchor="Panel.12" y="0" align="Top.Right" widthDock="Panel.Height.60" width="0" heightDock="Panel.Height.60" height="0" font="Arial" style="Regular" size="300" fg="0,255,255,255" onClick="PlayPause">X</element>
+
+	<!-- Album Info -->
+	<element name="#artwork_text_1" type="Field" id="Album" xAnchor="#Cover.Left" x="0" yAnchor="#Cover.Bottom" y="13" widthDock="x:#Cover.Right" width="0" align="left" font="Calibri" style="Regular" size="14" fg="255,255,255" />
+	<element name="#artwork_text_2" type="Field" xAnchor="#Cover.Left" x="0" yAnchor="#artwork_text_1.Bottom" y="13" width="0" font="Calibri" style="Regular" size="14" fg="200,200,200">
+		<child id="Year(YYYY)"/>
+		<child>   </child>
+		<child id="Genre"/>	
+    </element>
+	<element name="#artwork_text_3" type="Field" id="Comment"  xAnchor="#Cover.Left" x="0"  yAnchor="#artwork_text_2.Bottom" y="13" widthDock="x:#Cover.Right"  width="0" align="left" font="Calibri"  size="12" fg="200,200,200" hight="40" />
+	
+ 
+	<!-- Right panel -->
+    <autoHide name="#RightSidebarArtist" type="Block" xAnchor="Panel.52" x="0" yAnchor="#Cover.Top" y="0"   widthDock="x:Panel.93" heightDock="y:#artwork_text_3.Bottom" width="0"  height="0" bg="0,0,0,0" fg="215,215,215" fg2="255,255,255" allowPinning="false" >
+        <element type="AlbumTracks" xAnchor="Panel.52"  yAnchor="#Cover.Top"  x="0" y="0" widthDock="Panel.Right" width="0" heightDock="y:#artwork_text_3.Bottom" height="0" font="Segoe UI" size="12"   fg="245,245,245" fg2="250,250,30"  mouseOverFg="250,250,100">
+            <child id="Speaker" width="25" fg="250,250,30"  />
+            <child id="DiscAndTrackNo" style="Regular" size="12" width="50"/>
+            <child>  </child>
+            <child id="Title" widthDock="Panel.Width.24" width="0" />
+            <child>  </child>
+            <child id="Duration" width="60" align="right" style="Regular" size="12" />
+        </element>  
+    </autoHide>
+
+    <autoHide name="#RightSidebarLyrics" type="Block" xAnchor="Panel.52" x="0" yAnchor="#Cover.Top" y="0"   widthDock="x:Panel.93" heightDock="y:#artwork_text_3.Bottom" width="0"  height="0" bg="0,0,0,0" fg="215,215,215" fg2="255,255,255"  allowPinning="false" autoOpenLyrics="true" >
+        <element type="Lyrics" xAnchor="Panel.52" x="0" yAnchor="#Cover.Top" y="0"   widthDock="x:Panel.93" heightDock="y:#artwork_text_3.Bottom" width="0"  height="0"  rowPadding="20" font="Segoe UI"  style="Regular" size="12" fg="200,200,200" fg2="255,255,0" mouseOverFg="250,250,0">	</element>
+    </autoHide>
+
+
+	<!-- Progress Bar -->
+	<element type="SoundGraph" name="#soundgraph" xAnchor="Panel.24" x="0" yAnchor="Panel.93.3" y="0" widthDock="x:Panel.76" width="0" height="33"  fg="150,255,255,255"  fg2="50,255,255,255" bg="50,255,255,255" />
+	<element type="PlayPosition" name="#playposition" xAnchor="#soundgraph.left" x="-50" yAnchor="Panel.94.2" y="0" width="40" font="Calibri" style="Regular" size="9" fg="50,255,255,255" />
+	<element type="PlayDuration" name="#duration"  xAnchor="#soundgraph.right" x="0" yAnchor="Panel.94.2" y="0" width="50" align="right" font="Calibri" style="Regular" size="9" fg="0,255,255,255" bg="255,255,255"   />
+
+	<!-- Track Info -->	
+	<element name="#title" type="Field" id="Title" xAnchor="Panel.10" x="0" yAnchor="#soundgraph.top" y="-50" align="center" widthDock="x:Panel.90" width="0" font="Segoe UI" style="Regular"  size="15" fg="240,240,240" mouseOverFg="200,255,200"  onClick="EditTags">
+		<child>  -  </child>
+		<child id="Artist"/>		
+	</element>
+
+	<!-- Rating (left align with play position) -->
+	<element type="Field" xAnchor="#playposition.left" x="0" yAnchor="#title.top" y="10" width="200" >
+		<child id="RatingLove" visible="MusicBeeSetting" fg="30,255,255,255" rightMargin="4" size="16"/>
+		<child id="Rating" visible="MusicBeeSetting" y="0" fg="255,255,0" fg2="50,255,255,255" size="16"/>
+	</element>
+
+	<!-- lyrics/Album track trigger --> 
+	<element type="Text" xAnchor="Panel.70" x="0" widthDock="x:#duration.right" align="right" width="0" yAnchor="#title.top" y="10"  font="Calibri" style="Regular" size="10" fg="245,245,245" onClick="OpenAutoHidePanel:#RightSidebarArtist">[Lyrics]</element>
+
+	<!-- LH Corner Controls -->
+	<element type="PlayerBar" xAnchor="Panel.0" x="-10" yAnchor="Panel.0" y="-10" width="0" height="0"/>
+	<element type="Text" xAnchor="Panel.8.7" x="0"  yAnchor="Panel.93.5" y="0"   widthDock="Panel.50" width="0" font="Webdings" style="Regular" size="20" fg="255,255,255" mouseOverFg="255,255,0" onClick="PlayPrevious">9</element>
+	<element type="Text" xAnchor="Panel.12.3" x="0"  yAnchor="Panel.92.9" y="0" widthDock="Panel.50" width="0" font="Webdings" style="Bold" size="25" fg="255,255,255" mouseOverFg="255,255,0" onClick="PlayPause" visibleTrigger="Playing">;</element>
+	<element type="Text" xAnchor="Panel.12.4" x="0"  yAnchor="Panel.92.9" y="0" widthDock="Panel.50" width="0" font="Arial" style="Regular" size="25" fg="255,255,255" mouseOverFg="255,255,0" onClick="PlayPause" visibleTrigger="NotPlaying">&#x25BA;</element>
+	<element type="Text" xAnchor="Panel.16.5" x="0" yAnchor="Panel.93.5" y="0"   widthDock="Panel.50" width="0" font="Webdings" style="Regular" size="20" fg="255,255,255" mouseOverFg="255,255,0" onClick="PlayNext">:</element>
+
+
+    <!-- Visualiser -->
+    <element type="SpectrumVisualiser" xAnchor="Panel.0" x="0" yAnchor="Panel.40" y="0" widthDock="x:Panel.Right" width="0" heightDock="y:Panel.Bottom" height="0" fg="60,0,0,10" fg2="20,20,0,0"  bdr="16,255,255,255"  />
+
+
+    <!-- coming up next  -->
+    <element type="Text" id="ComingText"  xAnchor="Panel.80" x="0" widthDock="Panel.100"  yAnchor="#title.top" y="10" width="0" font="Arial" style="Bold" size="13" fg="190,190,190"  onClick="OpenNowPlayingAssistant">Coming up next...</element>
+    <element type="Field" id="Tracks[1]"  xAnchor="Panel.80" x="0" widthDock="Panel.100" yAnchor="Panel.94" y="0" width="0" font="Arial" style="Bold" size="9.75" fg="190,190,190"  onClick="OpenNowPlayingAssistant">
+        <child id="Title" ></child>
+    </element>
+    <element type="Field" id="Tracks[1]"  xAnchor="Panel.80" x="0" widthDock="Panel.100" yAnchor="Panel.96" y="0" width="0" font="Arial" style="Regular" size="9.75" fg="180,180,180"  onClick="OpenNowPlayingAssistant">
+        <child id="Artist" />
+        <child font="Arial" style="Regular" size="9.75">  [</child>
+        <child font="Arial" style="Regular" size="9.75" id="Duration" />
+        <child font="Arial" style="Regular" size="9.75">]</child>
+    </element>
+
+</root>
